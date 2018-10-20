@@ -15,6 +15,19 @@ spring:
       password: ${MONGODB_PASSWORD}
       database: piggymetrics
       port: 27017
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/live-auction
+    username: postgresql
+    password: ${POSTGRESQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+      hibernate:
+        ddl-auto: none
+      show-sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: false
 
 server:
   servlet:
