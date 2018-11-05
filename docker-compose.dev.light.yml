@@ -1,5 +1,9 @@
 version: '2.1'
 services:
+  rabbitmq:
+    ports:
+      - 5672:5672
+
   config:
     build: config
     ports:
