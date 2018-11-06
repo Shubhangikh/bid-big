@@ -26,6 +26,9 @@ public class Account {
 	private List<Item> expenses;
 
 	@Valid
+	private Profile profile;
+
+	@Valid
 	@NotNull
 	private Saving saving;
 
@@ -79,4 +82,13 @@ public class Account {
 	public void setNote(String note) {
 		this.note = note;
 	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+	
 }

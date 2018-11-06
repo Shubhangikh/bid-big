@@ -2,6 +2,7 @@ package com.piggymetrics.account.controller;
 
 import com.piggymetrics.account.domain.Account;
 import com.piggymetrics.account.domain.User;
+import com.piggymetrics.account.domain.Profile;
 import com.piggymetrics.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,13 +28,18 @@ public class AccountController {
 		return accountService.findByName(principal.getName());
 	}
 
+	@RequestMapping(path = "/current/profile", method = RequestMethod.GET)
+	public Profile getCurrentAccountProfile(Principal principal) {
+		return accountService.findProfileByName(principal.getName());
+	}	
+
 	@RequestMapping(path = "/current", method = RequestMethod.PUT)
 	public void saveCurrentAccount(Principal principal, @Valid @RequestBody Account account) {
 		accountService.saveChanges(principal.getName(), account);
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.POST)
-	public Account createNewAccount(@Valid @RequestBody User user) {
-		return accountService.create(user);
+	public Account createNewAccount(@Valid @RequestBody User user, @Valid @RequestBody Profile profile) {
+		return accountService.create(user, profile);
 	}
 }

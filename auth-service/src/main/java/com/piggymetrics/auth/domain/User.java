@@ -15,6 +15,8 @@ public class User implements UserDetails {
 
 	private String password;
 
+	private PasswordResetToken token;
+
 	@Override
 	public String getPassword() {
 		return password;
@@ -36,6 +38,14 @@ public class User implements UserDetails {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setToken(PasswordResetToken token) {
+		this.token = token;
+	}
+
+	public PasswordResetToken getToken() {
+		return token;
 	}
 
 	@Override

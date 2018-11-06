@@ -5,6 +5,7 @@ import com.piggymetrics.account.client.StatisticsServiceClient;
 import com.piggymetrics.account.domain.Account;
 import com.piggymetrics.account.domain.Currency;
 import com.piggymetrics.account.domain.Saving;
+import com.piggymetrics.account.domain.Profile;
 import com.piggymetrics.account.domain.User;
 import com.piggymetrics.account.repository.AccountRepository;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account create(User user) {
+	public Account create(User user, Profile profile) {
 
 		Account existing = repository.findByName(user.getUsername());
 		Assert.isNull(existing, "account already exists: " + user.getUsername());
@@ -61,6 +62,7 @@ public class AccountServiceImpl implements AccountService {
 		account.setName(user.getUsername());
 		account.setLastSeen(new Date());
 		account.setSaving(saving);
+		account.setProfile(profile);
 
 		repository.save(account);
 
@@ -83,6 +85,7 @@ public class AccountServiceImpl implements AccountService {
 		account.setSaving(update.getSaving());
 		account.setNote(update.getNote());
 		account.setLastSeen(new Date());
+		account.setProfile(update.getProfile());
 		repository.save(account);
 
 		log.debug("account {} changes has been saved", name);

@@ -14,6 +14,8 @@ public class User {
 	@Length(min = 6, max = 40)
 	private String password;
 
+	private Profile profile;
+
 	public String getUsername() {
 		return username;
 	}
@@ -29,4 +31,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}	
 }

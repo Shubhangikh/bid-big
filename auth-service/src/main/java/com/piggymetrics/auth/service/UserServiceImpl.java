@@ -34,4 +34,21 @@ public class UserServiceImpl implements UserService {
 
 		log.info("new user has been created: {}", user.getUsername());
 	}
+
+	@Override
+	public void resetPassword(String username) {
+
+		Optional<User> existing = repository.findById(username);
+		User user = existing.orElse(null);
+		if(user == null) {
+			throw new IllegalArgumentException("user doesn't exists: " + username);
+		}
+
+		String hash = encoder.encode(user.getPassword());
+		user.setPassword(hash);
+
+		repository.save(user);
+
+		log.info("new user has been created: {}", user.getUsername());
+	}	
 }

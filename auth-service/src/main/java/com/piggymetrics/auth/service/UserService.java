@@ -6,4 +6,5 @@ public interface UserService {
 
 	void create(User user);
 
+	void resetPassword(String username);
 }

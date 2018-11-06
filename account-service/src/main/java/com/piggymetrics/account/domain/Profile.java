@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
+
 @Document(collection = "profiles")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Profile {
@@ -36,7 +37,7 @@ public class Profile {
 		this.name = name;
 	}
 
-	public Date getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
@@ -60,19 +61,12 @@ public class Profile {
 		this.zip = zip;
 	}
 
-	public Saving getSaving() {
-		return saving;
+	public List<Integer> getItems() {
+		return items;
 	}
 
-	public void setSaving(Saving saving) {
-		this.saving = saving;
+	public void setItems(List<Integer> items) {
+		this.items = items;
 	}
 
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
 }

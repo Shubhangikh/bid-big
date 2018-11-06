@@ -24,6 +24,11 @@ public class UserController {
 		return principal;
 	}
 
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
+	public void resetPassword(@Valid @RequestBody String username) {
+		userService.resetPassword(username);
+	}	
+
 	@PreAuthorize("#oauth2.hasScope('server')")
 	@RequestMapping(method = RequestMethod.POST)
 	public void createUser(@Valid @RequestBody User user) {
