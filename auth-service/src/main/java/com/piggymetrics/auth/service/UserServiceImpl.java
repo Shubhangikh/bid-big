@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import java.util.UUID;
 
 import java.util.Optional;
 
@@ -44,8 +45,11 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("user doesn't exists: " + username);
 		}
 
+		String token = UUID.randomUUID().toString();
+		
 		String hash = encoder.encode(user.getPassword());
 		user.setPassword(hash);
+
 
 		repository.save(user);
 

@@ -3,7 +3,8 @@ package com.piggymetrics.notification.domain;
 public enum NotificationType {
 
 	BACKUP("backup.email.subject", "backup.email.text", "backup.email.attachment"),
-	REMIND("remind.email.subject", "remind.email.text", null);
+	REMIND("remind.email.subject", "remind.email.text", null),
+	RESET("reset.email.subject", "reset.email.text", null);
 
 	private String subject;
 	private String text;
