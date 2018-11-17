@@ -3,14 +3,18 @@ package com.piggymetrics.notification.service;
 import com.piggymetrics.notification.client.AccountServiceClient;
 import com.piggymetrics.notification.domain.NotificationType;
 import com.piggymetrics.notification.domain.Recipient;
+import com.piggymetrics.notification.domain.ResetRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.core.env.Environment;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.text.MessageFormat;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -25,6 +29,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private Environment env;	
 
 	@Override
 	@Scheduled(cron = "${backup.cron}")
@@ -64,4 +71,23 @@ public class NotificationServiceImpl implements NotificationService {
 			}
 		}));
 	}
+
+	@Override
+	public void sendResetNotification(ResetRequest request) {
+
+		NotificationType notif = request.getType();
+		String url = request.getUrl();
+
+		Recipient recipient = request.getRecipient();
+
+		final String subject = env.getProperty(notif.getSubject());
+		final String text = MessageFormat.format(env.getProperty(notif.getText()), url);
+
+		try {
+			emailService.sendEmail(subject, text, recipient);
+		} catch(Throwable t) {
+			log.error("an error during reset notification for {}", recipient, t);
+		}
+
+	}	
 }

@@ -2,9 +2,12 @@ package com.piggymetrics.account.domain;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import com.piggymetrics.account.domain.*;
 
+@Embeddable
 public class Item {
 
 	@NotNull

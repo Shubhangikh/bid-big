@@ -80,6 +80,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
     image: sqshq/piggymetrics-account-service
     restart: always
     depends_on:
@@ -90,16 +91,16 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  account-mongodb:
-    environment:
-      INIT_DUMP: account-service-dump.js
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+  # account-mongodb:
+  #   environment:
+  #     INIT_DUMP: account-service-dump.js
+  #     MONGODB_PASSWORD: $MONGODB_PASSWORD
+  #   image: sqshq/piggymetrics-mongodb
+  #   restart: always
+  #   logging:
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "10"
 
   postgresql:
     image: postgres
@@ -108,3 +109,4 @@ services:
     environment:
       POSTGRES_PASSWORD: $POSTGRESQL_PASSWORD
       POSTGRES_DB: "live-auction"
+

@@ -10,4 +10,6 @@ public interface EmailService {
 
 	void send(NotificationType type, Recipient recipient, String attachment) throws MessagingException, IOException;
 
+	void sendEmail(String subject, String  body, Recipient recipient) throws MessagingException, IOException;
+
 }

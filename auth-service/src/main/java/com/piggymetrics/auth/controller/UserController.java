@@ -1,5 +1,6 @@
 package com.piggymetrics.auth.controller;
 
+import com.piggymetrics.auth.domain.ResetPassword;
 import com.piggymetrics.auth.domain.User;
 import com.piggymetrics.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -25,9 +27,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/reset", method = RequestMethod.POST)
-	public void resetPassword(@Valid @RequestBody String username) {
-		userService.resetPassword(username);
-	}	
+	public void resetPassword(@Valid @RequestBody User user) {
+		userService.resetPassword(user);
+	}
+
+	@RequestMapping(value = "/resetted", method = RequestMethod.POST)
+	public void resettedPassword(@Valid @RequestBody ResetPassword resetPassword) {
+		userService.resettedPassword(resetPassword);
+	}
 
 	@PreAuthorize("#oauth2.hasScope('server')")
 	@RequestMapping(method = RequestMethod.POST)

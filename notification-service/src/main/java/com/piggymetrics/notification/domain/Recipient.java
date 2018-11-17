@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Document(collection = "recipients")
-public class Recipient {
+public class Recipient implements RecipientInterface {
 
 	@Id
 	private String accountName;

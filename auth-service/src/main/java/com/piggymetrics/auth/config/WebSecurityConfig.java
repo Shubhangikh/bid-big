@@ -2,6 +2,7 @@ package com.piggymetrics.auth.config;
 
 import com.piggymetrics.auth.service.security.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +24,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-                .authorizeRequests().anyRequest().authenticated()
+                .antMatcher("/**")
+                .authorizeRequests()
+                .antMatchers("/users/reset**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
         // @formatter:on

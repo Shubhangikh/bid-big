@@ -1,21 +1,24 @@
 package com.piggymetrics.account.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
 
-@Document(collection = "profiles")
-@JsonIgnoreProperties(ignoreUnknown = true)
+
+@Entity
+@Table(name = "profile")
 public class Profile {
 
 	@Id
+	@GeneratedValue
+	private long id;
+
 	private String name;
 
     @Valid
@@ -26,8 +29,19 @@ public class Profile {
 
     @Valid
     private Integer zip;
-    
-    private List<Integer> items;
+
+	@OneToOne
+	@JoinColumn(name="account")
+	private Account account;
+	
+
+	public long getId() {
+		return id;
+	 }
+	 
+	 public void setId( long id ) {
+		this.id = id;
+	 }
 
 	public String getName() {
 		return name;
@@ -61,12 +75,12 @@ public class Profile {
 		this.zip = zip;
 	}
 
-	public List<Integer> getItems() {
-		return items;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
-	public void setItems(List<Integer> items) {
-		this.items = items;
+	public Account getAccount() {
+		return account;
 	}
 
 }

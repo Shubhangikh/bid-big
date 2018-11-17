@@ -30,7 +30,7 @@ services:
     ports:
       - 6000:6000
 
-  account-mongodb:
-    build: mongodb
-    ports:
-      - 26000:27017
+  # account-mongodb:
+  #   build: mongodb
+  #   ports:
+  #     - 26000:27017

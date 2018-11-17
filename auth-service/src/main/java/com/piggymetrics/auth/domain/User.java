@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.validator.constraints.Email;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class User implements UserDetails {
 	private String password;
 
 	private PasswordResetToken token;
+
+	@Email
+	private String email;
 
 	@Override
 	public String getPassword() {
@@ -46,6 +50,14 @@ public class User implements UserDetails {
 
 	public PasswordResetToken getToken() {
 		return token;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	@Override

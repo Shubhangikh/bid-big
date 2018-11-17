@@ -51,4 +51,24 @@ public class EmailServiceImpl implements EmailService {
 
 		log.info("{} email notification has been send to {}", type, recipient.getEmail());
 	}
+
+	@Override
+	public void sendEmail(String subject, String body, Recipient recipient) throws MessagingException, IOException {
+
+		MimeMessage message = mailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		helper.setTo(recipient.getEmail());
+		helper.setSubject(subject);
+		helper.setText(body);
+
+		// if (StringUtils.hasLength(attachment)) {
+		// 	helper.addAttachment(env.getProperty(type.getAttachment()), new ByteArrayResource(attachment.getBytes()));
+		// }
+
+		mailSender.send(message);
+
+		log.info("{} email reset password notification has been send to {}", recipient.getEmail());
+	}
+	
 }

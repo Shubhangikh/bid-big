@@ -1,6 +1,7 @@
 package com.piggymetrics.account.domain;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +16,9 @@ public class User {
 	private String password;
 
 	private Profile profile;
+
+	@Email
+	private String email;
 
 	public String getUsername() {
 		return username;
@@ -32,11 +36,19 @@ public class User {
 		this.password = password;
 	}
 
-	public String getProfile() {
+	public Profile getProfile() {
 		return profile;
 	}
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
-	}	
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

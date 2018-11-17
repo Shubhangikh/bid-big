@@ -1,4 +1,4 @@
-package com.piggymetrics.notification.domain;
+package com.piggymetrics.auth.domain;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Document(collection = "recipients")
-public class Recipient {
+public class Recipient implements RecipientInterface{
 
 	@Id
 	private String accountName;
@@ -17,9 +17,6 @@ public class Recipient {
 	@NotNull
 	@Email
 	private String email;
-
-	@Valid
-	private Map<NotificationType, NotificationSettings> scheduledNotifications;
 
 	public String getAccountName() {
 		return accountName;
@@ -35,14 +32,6 @@ public class Recipient {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Map<NotificationType, NotificationSettings> getScheduledNotifications() {
-		return scheduledNotifications;
-	}
-
-	public void setScheduledNotifications(Map<NotificationType, NotificationSettings> scheduledNotifications) {
-		this.scheduledNotifications = scheduledNotifications;
 	}
 
 	@Override

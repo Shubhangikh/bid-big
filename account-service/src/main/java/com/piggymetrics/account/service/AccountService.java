@@ -1,8 +1,7 @@
 package com.piggymetrics.account.service;
 
 import com.piggymetrics.account.domain.Account;
-import com.piggymetrics.account.domain.Profile;
-import com.piggymetrics.account.domain.User;
+import com.piggymetrics.account.domain.Register;
 
 public interface AccountService {
 
@@ -19,10 +18,10 @@ public interface AccountService {
 	 * Invokes Auth Service user creation
 	 * Creates new account with default parameters
 	 *
-	 * @param user
+	 * @param Register
 	 * @return created account
 	 */
-	Account create(User user, Profile profile);
+	Account create(Register register);
 
 	/**
 	 * Validates and applies incoming account updates

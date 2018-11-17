@@ -17,7 +17,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -35,14 +35,14 @@
 	
 	<modules>
 		<module>config</module>
-		<module>monitoring</module>
+		<!-- <module>monitoring</module> -->
 		<module>registry</module>
 		<module>gateway</module>
 		<module>auth-service</module>
 		<module>account-service</module>
-		<module>statistics-service</module>
+		<!-- <module>statistics-service</module>
 		<module>notification-service</module>
-		<module>turbine-stream-service</module>
+		<module>turbine-stream-service</module> -->
 	</modules>
 
 </project>
