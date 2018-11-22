@@ -1,6 +1,6 @@
-package com.piggymetrics.notification.repository;
+package com.piggymetrics.auction.repository;
 
-import com.piggymetrics.notification.domain.Recipient;
+import com.piggymetrics.auction.domain.Auction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

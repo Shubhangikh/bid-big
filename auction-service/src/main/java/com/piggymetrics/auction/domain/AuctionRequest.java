@@ -2,6 +2,7 @@ package com.piggymetrics.auction.domain;
 
 import javax.validation.constraints.NotNull;
 import org.joda.time.DateTime;
+import java.util.Date;
 
 public class AuctionRequest {
 
@@ -18,7 +19,7 @@ public class AuctionRequest {
     private int slots;
 
     public void setAuctionDate(Date auctionDate){
-        this.auctionDate = auctionDate
+        this.auctionDate = auctionDate;
     }
 
     public Date getAuctionDate() {
@@ -34,10 +35,10 @@ public class AuctionRequest {
     }
     
     public void setEndDate(DateTime endTime){
-        this.endTime = endTime
+        this.endTime = endTime;
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return endTime;
     }    
 

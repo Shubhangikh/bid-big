@@ -40,7 +40,7 @@ services:
     ports:
       - 28000:27017
 
-  # account-mongodb:
-  #   build: mongodb
-  #   ports:
-  #     - 26000:27017
+  auction-service:
+    build: auction-service
+    ports:
+      - 8001:8001

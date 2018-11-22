@@ -1,9 +1,12 @@
 package com.piggymetrics.auction.domain;
 
 import java.util.Date;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "auction")

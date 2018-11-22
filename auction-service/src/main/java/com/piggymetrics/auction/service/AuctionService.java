@@ -4,6 +4,6 @@ import com.piggymetrics.auction.domain.*;
 
 public interface AuctionService {
 
-	Void createAuctions(AuctionRequest request);
+	void createAuctions(AuctionRequest request);
 
 }

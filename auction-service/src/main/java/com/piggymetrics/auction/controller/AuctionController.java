@@ -3,6 +3,7 @@ package com.piggymetrics.auction.controller;
 import javax.validation.Valid;
 
 import com.piggymetrics.auction.domain.AuctionRequest;
+import com.piggymetrics.auction.service.AuctionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,8 +19,8 @@ public class AuctionController {
 	private AuctionService auctionService;
 
 	@RequestMapping(path = "/create", method = RequestMethod.POST)
-	public String createAuction(@Valid @RequestBody AuctionRequest request) {
-		return auctionService.createAuction( request);
+	public void createAuction(@Valid @RequestBody AuctionRequest request) {
+		auctionService.createAuctions( request);
 	}
 	
 }
