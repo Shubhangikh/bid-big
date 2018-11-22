@@ -1,0 +1,35 @@
+security:
+  oauth2:
+    client:
+      clientId: auction-service
+      clientSecret: ${AUCTION_SERVICE_PASSWORD}
+      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+server:
+  servlet:
+    context-path: /auctions
+  port: 8001
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/liveauctionauction
+    username: postgres
+    password: ${POSTGRESQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+      properties:
+        hibernate:
+          temp:
+            use_jdbc_metadata_defaults: false
+      hibernate:
+        ddl-auto: create
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      show-sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: false

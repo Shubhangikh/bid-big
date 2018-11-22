@@ -1,4 +1,4 @@
-package com.piggymetrics.notification.config;
+package com.piggymetrics.auction.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-import com.piggymetrics.notification.service.security.CustomUserInfoTokenServices;
+import com.piggymetrics.auction.service.security.CustomUserInfoTokenServices;
 
 
 import feign.RequestInterceptor;
@@ -56,7 +56,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/reset").permitAll()
+                .antMatchers("/create").hasAuthority("ADMIN")
+                .antMatchers("/list").hasAuthority("USER")
+                .antMatchers("/update").hasAuthority("USER")
                 .anyRequest().authenticated();
     }
 }

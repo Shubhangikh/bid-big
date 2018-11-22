@@ -41,5 +41,11 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    auction-service:
+        path: /auctions/**
+        serviceId: auction-service
+        stripPrefix: false
+        sensitiveHeaders:
+
 server:
   port: 4000
