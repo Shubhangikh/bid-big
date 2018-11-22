@@ -73,7 +73,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public void sendResetNotification(ResetRequest request) {
+	public String sendResetNotification(ResetRequest request) {
 
 		NotificationType notif = request.getType();
 		String url = request.getUrl();
@@ -87,7 +87,10 @@ public class NotificationServiceImpl implements NotificationService {
 			emailService.sendEmail(subject, text, recipient);
 		} catch(Throwable t) {
 			log.error("an error during reset notification for {}", recipient, t);
+			return "Failed";
 		}
+
+		return "Success";
 
 	}	
 }

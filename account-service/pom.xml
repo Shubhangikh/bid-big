@@ -78,6 +78,11 @@
 			<artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.netflix.feign</groupId>
+			<artifactId>feign-okhttp</artifactId>
+			<version>8.18.0</version>
+		</dependency>		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>

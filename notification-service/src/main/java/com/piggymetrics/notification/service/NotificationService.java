@@ -10,5 +10,5 @@ public interface NotificationService {
 
 	void sendRemindNotifications();
 
-	void sendResetNotification(ResetRequest request);
+	String sendResetNotification(ResetRequest request);
 }

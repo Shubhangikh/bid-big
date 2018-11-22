@@ -1,15 +1,45 @@
+security:
+  oauth2:
+    client:
+      clientId: auth-service
+      clientSecret: ${AUTH_SERVICE_PASSWORD}
+      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      filter-order: 3
+
 spring:
-  data:
-    mongodb:
-      host: auth-mongodb
-      username: user
-      password: ${MONGODB_PASSWORD}
-      database: piggymetrics
-      port: 27017
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/liveauctionauth
+    username: postgres
+    password: black
+    driver-class-name: org.postgresql.Driver
+  jpa:
+      properties:
+        hibernate:
+          temp:
+            use_jdbc_metadata_defaults: false
+      hibernate:
+        ddl-auto: create
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      show-sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: false
+
 
 server:
   servlet:
     context-path: /uaa
   port: 5000
 
+feign:
+  okhttp:
+    enabled: true
+
 domain: http://localhost/
+

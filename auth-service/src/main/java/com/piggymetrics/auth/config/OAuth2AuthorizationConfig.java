@@ -1,6 +1,6 @@
 package com.piggymetrics.auth.config;
 
-import com.piggymetrics.auth.service.security.MongoUserDetailsService;
+import com.piggymetrics.auth.service.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private MongoUserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private Environment env;
@@ -48,6 +48,11 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 .and()
                 .withClient("account-service")
                 .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
+                .authorizedGrantTypes("client_credentials", "refresh_token")
+                .scopes("server")
+                .and()
+                .withClient("auth-service")
+                .secret(env.getProperty("AUTH_SERVICE_PASSWORD"))
                 .authorizedGrantTypes("client_credentials", "refresh_token")
                 .scopes("server")
                 .and()

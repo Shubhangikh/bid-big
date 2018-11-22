@@ -1,4 +1,4 @@
-package com.piggymetrics.account.service.security;
+package com.piggymetrics.notification.service.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -84,7 +84,6 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
 	private Object getPrincipal(Map<String, Object> map) {
 		for (String key : PRINCIPAL_KEYS) {
-			System.out.println(key);
 			if (map.containsKey(key)) {
 				return map.get(key);
 			}
@@ -97,8 +96,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 		Map<String, Object> request = (Map<String, Object>) map.get("oauth2Request");
 
 		String clientId = (String) request.get("clientId");
-		System.out.println("Requet kkkkkkkkkkkkkkkkkkkkkkkkkkk Accounts");
-		System.out.println(request);
+
 		Set<String> scope = new LinkedHashSet<>(request.containsKey("scope") ?
 				(Collection<String>) request.get("scope") : Collections.<String>emptySet());
 

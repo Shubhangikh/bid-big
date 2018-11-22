@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface AuthServiceClient {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/uaa/users", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	void createUser(User user);
+	User createUser(User user);
 
 }

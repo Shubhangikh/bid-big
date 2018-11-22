@@ -1,8 +1,10 @@
 package com.piggymetrics.auth.domain;
 
 import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.util.Date;
 
+@Embeddable
 public class PasswordResetToken {
 
 	@NotNull

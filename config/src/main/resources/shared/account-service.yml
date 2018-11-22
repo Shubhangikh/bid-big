@@ -16,7 +16,7 @@ spring:
   #     database: piggymetrics
   #     port: 27017
   datasource:
-    url: jdbc:postgresql://postgresql:5432/live-auction
+    url: jdbc:postgresql://postgresql:5432/liveauction
     username: postgres
     password: ${POSTGRESQL_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -44,4 +44,6 @@ server:
 
 feign:
   hystrix:
+    enabled: true
+  okhttp:
     enabled: true

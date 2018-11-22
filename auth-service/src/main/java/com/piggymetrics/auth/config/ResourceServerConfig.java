@@ -1,5 +1,7 @@
-package com.piggymetrics.notification.config;
+package com.piggymetrics.auth.config;
 
+import com.piggymetrics.auth.service.security.CustomUserInfoTokenServices;
+import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,10 +15,6 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-import com.piggymetrics.notification.service.security.CustomUserInfoTokenServices;
-
-
-import feign.RequestInterceptor;
 
 /**
  * @author cdov
@@ -48,15 +46,30 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
 
-    @Bean
-    public ResourceServerTokenServices tokenServices() {
-        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-    }
+    // @Bean
+    // public ResourceServerTokenServices tokenServices() {
+    //     return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+    // }
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
+    // @Override
+    // public void configure(HttpSecurity http) throws Exception {
+    //     http.authorizeRequests()
+    //             .antMatchers("/current").hasAuthority("USER")
+    //             .antMatchers("/" , "/demo").permitAll()
+    //             .anyRequest().authenticated();
+    // }
+
+	public void configure(HttpSecurity http) throws Exception {
+		// @formatter:off
         http.authorizeRequests()
-                .antMatchers("/reset").permitAll()
-                .anyRequest().authenticated();
-    }
+                .antMatchers("/users/reset**").permitAll();
+            // http
+            //     .antMatcher("/**")
+            //     .authorizeRequests()
+            //     .antMatchers("/users/reset**","/users**").permitAll()
+            //     .anyRequest().authenticated()
+            //     .and()
+            //     .csrf().disable();
+		// @formatter:on
+   }
 }

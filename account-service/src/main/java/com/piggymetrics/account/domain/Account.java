@@ -9,13 +9,11 @@ import javax.persistence.*;
 public class Account {
 
     @Id
-    @Column(name = "ACCOUNT_ID")
 	private String name;
 
 	private Date lastSeen;
 
-	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, 
-	fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, optional = false)
 	private Profile profile;
 
 

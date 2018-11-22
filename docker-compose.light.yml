@@ -65,15 +65,15 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  auth-mongodb:
-    environment:
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+  # auth-mongodb:
+  #   environment:
+  #     MONGODB_PASSWORD: $MONGODB_PASSWORD
+  #   image: sqshq/piggymetrics-mongodb
+  #   restart: always
+  #   logging:
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "10"
 
   account-service:
     environment:
@@ -86,6 +86,31 @@ services:
     depends_on:
       config:
         condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  notification-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+      NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
+    image: sqshq/piggymetrics-notification-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  notification-mongodb:
+    image: sqshq/piggymetrics-mongodb
+    restart: always
+    environment:
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
     logging:
       options:
         max-size: "10m"
@@ -104,9 +129,13 @@ services:
 
   postgresql:
     image: postgres
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
     ports:
     - "5432:5432"
     environment:
+      POSTGRES_MULTIPLE_DATABASES: 'liveauction,liveauctionauth'
       POSTGRES_PASSWORD: $POSTGRESQL_PASSWORD
-      POSTGRES_DB: "live-auction"
+      POSTGRES_USER: postgres
+
 

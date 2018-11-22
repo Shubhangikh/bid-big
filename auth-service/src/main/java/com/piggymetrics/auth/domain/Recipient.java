@@ -1,14 +1,15 @@
 package com.piggymetrics.auth.domain;
 
 import org.hibernate.validator.constraints.Email;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 
-@Document(collection = "recipients")
+@Entity
+@Table(name = "receipient")
 public class Recipient implements RecipientInterface{
 
 	@Id

@@ -1,5 +1,6 @@
 #!/bin/bash
 export ACCOUNT_SERVICE_PASSWORD=black
+export AUTH_SERVICE_PASSWORD=black
 export MONGODB_PASSWORD=black
 export CONFIG_SERVICE_PASSWORD=black
 export NOTIFICATION_SERVICE_PASSWORD=black

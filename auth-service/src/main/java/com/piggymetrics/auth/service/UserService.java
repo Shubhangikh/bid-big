@@ -5,7 +5,7 @@ import com.piggymetrics.auth.domain.User;
 
 public interface UserService {
 
-	void create(User user);
+	User create(User user);
 
 	void resetPassword(User user);
 

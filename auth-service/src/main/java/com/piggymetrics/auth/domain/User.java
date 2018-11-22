@@ -1,14 +1,24 @@
 package com.piggymetrics.auth.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Embedded;
+
+import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.hibernate.validator.constraints.Email;
 
-import java.util.List;
-
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
 	@Id
@@ -16,7 +26,12 @@ public class User implements UserDetails {
 
 	private String password;
 
+	@Embedded
 	private PasswordResetToken token;
+
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 	@Email
 	private String email;
@@ -50,6 +65,14 @@ public class User implements UserDetails {
 
 	public PasswordResetToken getToken() {
 		return token;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	public void setEmail(String email) {

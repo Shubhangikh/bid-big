@@ -20,15 +20,25 @@ services:
     ports:
       - 5000:5000
 
-  auth-mongodb:
-    build: mongodb
-    ports:
-      - 25000:27017
+  # auth-mongodb:
+  #   build: mongodb
+  #   ports:
+  #     - 25000:27017
 
   account-service:
     build: account-service
     ports:
       - 6000:6000
+
+  notification-service:
+    build: notification-service
+    ports:
+      - 8000:8000
+
+  notification-mongodb:
+    build: mongodb
+    ports:
+      - 28000:27017
 
   # account-mongodb:
   #   build: mongodb

@@ -10,23 +10,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 @SpringBootApplication
-@EnableResourceServer
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class AuthApplication extends ResourceServerConfigurerAdapter{
+public class AuthApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthApplication.class, args);
 	}
-
-
-	public void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
-        http.authorizeRequests()
-                .antMatchers("/users/reset**" , "/users/**").permitAll();
-		// @formatter:on
-   }
 
 
 }

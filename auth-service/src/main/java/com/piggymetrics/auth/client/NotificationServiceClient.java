@@ -11,7 +11,7 @@ import com.piggymetrics.auth.domain.*;
 @FeignClient(name = "notification-service")
 public interface NotificationServiceClient {
 
-	@RequestMapping(method = RequestMethod.POST, value = "/notifications/notif/reset", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(method = RequestMethod.POST, value = "/notifications/reset", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	String sendPasswordReset(ResetRequest req);
 
 }

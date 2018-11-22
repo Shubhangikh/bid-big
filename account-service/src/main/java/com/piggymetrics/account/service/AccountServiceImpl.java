@@ -38,6 +38,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account findByName(String accountName) {
 		Assert.hasLength(accountName);
+		System.out.println("--------------------"+ accountName);
 		return repository.findByName(accountName);
 	}
 
@@ -58,16 +59,10 @@ public class AccountServiceImpl implements AccountService {
 
 		authClient.createUser(user);
 
-		Saving saving = new Saving();
-		saving.setAmount(new BigDecimal(0));
-		saving.setCurrency(Currency.getDefault());
-		saving.setInterest(new BigDecimal(0));
-		saving.setDeposit(false);
-		saving.setCapitalization(false);
-
 		Account account = new Account();
 		account.setName(user.getUsername());
 		account.setLastSeen(new Date());
+		profile.setAccount(account);
 		account.setProfile(profile);
 
 		repository.save(account);
