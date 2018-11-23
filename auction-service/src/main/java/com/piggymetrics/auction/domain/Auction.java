@@ -20,10 +20,12 @@ public class Auction {
     
     @Column
 	@NotNull
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime startTime;
 	
     @Column
 	@NotNull
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime endTime;	
 
 	@Column
