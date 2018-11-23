@@ -32,4 +32,8 @@ public class AuctionController {
 		return auctionService.listAuctions( request);
 	}
 
+	@RequestMapping(path = "/update", method = RequestMethod.POST)
+	public void updateAuction(@Valid @RequestBody Auction request) {
+		auctionService.updateAuction( request);
+	}	
 }

@@ -83,6 +83,11 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
+	public void updateAuction(Auction request) {
+		auctionRepository.save(request);
+	}	
+
+	@Override
 	public void createAuctions(AuctionRequest request) {
 
 		Date auctionDate = request.getAuctionDate();
