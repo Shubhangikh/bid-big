@@ -1,6 +1,11 @@
 package com.piggymetrics.auction.service;
 
 import com.piggymetrics.auction.domain.AuctionRequest;
+import com.piggymetrics.auction.domain.TimeSlot;
+import com.piggymetrics.auction.domain.Auction;
+import com.piggymetrics.auction.domain.DateRange;
+
+import com.piggymetrics.auction.repository.AuctionRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.core.env.Environment;
+import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -17,8 +26,8 @@ public class AuctionServiceImpl implements AuctionService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	// @Autowired
-	// private AccountServiceClient client;
+	@Autowired
+	private AuctionRepository auctionRepository;
 
 	// @Autowired
 	// private RecipientService recipientService;
@@ -69,7 +78,28 @@ public class AuctionServiceImpl implements AuctionService {
 	// }
 
 	@Override
+	public List<Auction> listAuctions(DateRange request) {
+		return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate());
+	}
+
+	@Override
 	public void createAuctions(AuctionRequest request) {
+
+		Date auctionDate = request.getAuctionDate();
+		DateTime startTime = request.getStartTime();
+		DateTime endTime = request.getEndTime();
+		int slots = request.getSlots();
+
+		ArrayList<TimeSlot> auctionSlots = getSlots(startTime, endTime, slots);
+
+		for(TimeSlot slot : auctionSlots) {
+			System.out.println(slot.getStartTime());
+			Auction auction = new Auction();
+			auction.setStartTime(slot.getStartTime());
+			auction.setEndTime(slot.getEndTime());
+			auction.setAuctionDate(new Date());
+			auctionRepository.save(auction);
+		}
 
 		// NotificationType notif = request.getType();
 		// String url = request.getUrl();
@@ -88,5 +118,20 @@ public class AuctionServiceImpl implements AuctionService {
 
 		// return "Success";
 
-	}	
+	}
+
+	private ArrayList<TimeSlot> getSlots(DateTime startTime, DateTime endTime, int slotC) {
+		ArrayList<TimeSlot> slots = new ArrayList<>();
+
+		long interval = (long)(endTime.getMillis() - startTime.getMillis())/slotC;
+		
+		for (long start = startTime.getMillis(); start+interval <= endTime.getMillis(); start += interval) {
+			TimeSlot slot = new TimeSlot();
+			slot.setStartTime(new DateTime(start));
+			slot.setEndTime(new DateTime(start+interval));
+			slots.add(slot);
+		  }
+
+		return slots;
+	}
 }

@@ -16,7 +16,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableOAuth2Client
-@EnableFeignClients
+// @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class AuctionServiceApplication {
 

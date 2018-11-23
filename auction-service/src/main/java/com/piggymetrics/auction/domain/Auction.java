@@ -19,12 +19,10 @@ public class Auction {
     private Long itemId;
     
     @Column
-	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	@NotNull
 	private DateTime startTime;
 	
     @Column
-	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	@NotNull
     private DateTime endTime;	
 

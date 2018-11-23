@@ -4,4 +4,4 @@ MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
 ADD ./target/auction-service.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/auction-service.jar"]
 
-EXPOSE 8000
+EXPOSE 8001

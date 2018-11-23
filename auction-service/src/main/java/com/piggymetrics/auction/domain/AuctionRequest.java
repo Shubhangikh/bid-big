@@ -34,11 +34,11 @@ public class AuctionRequest {
         return startTime;
     }
     
-    public void setEndDate(DateTime endTime){
+    public void setEndTime(DateTime endTime){
         this.endTime = endTime;
     }
 
-    public DateTime getEndDate() {
+    public DateTime getEndTime() {
         return endTime;
     }    
 

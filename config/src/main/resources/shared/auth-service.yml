@@ -21,7 +21,7 @@ spring:
           temp:
             use_jdbc_metadata_defaults: false
       hibernate:
-        ddl-auto: create
+        ddl-auto: update
         jdbc:
           lob:
             non_contextual_creation: true

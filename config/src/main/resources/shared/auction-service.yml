@@ -16,7 +16,7 @@ spring:
   datasource:
     url: jdbc:postgresql://postgresql:5432/liveauctionauction
     username: postgres
-    password: ${POSTGRESQL_PASSWORD}
+    password: black
     driver-class-name: org.postgresql.Driver
   jpa:
       properties:
@@ -33,3 +33,6 @@ spring:
       database-platform: org.hibernate.dialect.PostgreSQLDialect
       open-in-view: false
       generate-ddl: false
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
