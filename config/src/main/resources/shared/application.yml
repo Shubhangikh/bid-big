@@ -13,14 +13,20 @@ hystrix:
 eureka:
   instance:
     prefer-ip-address: true
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
   client:
     serviceUrl:
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: https://registry:8761/eureka/
 
 security:
   oauth2:
     resource:
-      user-info-uri: http://auth-service:5000/uaa/users/current
+      user-info-uri: https://auth-service:5000/uaa/users/current
 
 spring:
   rabbitmq:

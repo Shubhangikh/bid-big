@@ -9,6 +9,7 @@ hystrix:
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
+  IsSecure: true
 
 zuul:
   ignoredServices: '*'
@@ -19,7 +20,7 @@ zuul:
   routes:
     auth-service:
         path: /uaa/**
-        url: http://auth-service:5000
+        url: https://auth-service:5000
         stripPrefix: false
         sensitiveHeaders:
 
@@ -49,3 +50,10 @@ zuul:
 
 server:
   port: 4000
+  ssl:
+    enabled: true
+    key-store: classpath:gateway.p12
+    key-store-password: black123
+    trust-store: classpath:cacerts
+    trust-store-password: black123
+    key-alias: gateway

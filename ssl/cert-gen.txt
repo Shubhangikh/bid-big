@@ -1,0 +1,23 @@
+For account service
+keytool -genkeypair -alias account -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+
+keytool -export -keystore keystore.p12 -alias auth -file account.crt
+
+keytool -import -alias account -file ./account.crt -keystore ./cacerts -storePass black123
+
+For auth service
+keytool -genkeypair -alias auth -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+
+keytool -export -keystore keystore.p12 -alias auth -file auth.crt
+
+keytool -import -alias auth -file ./account.crt -keystore ./cacerts -storePass black123
+
+For eureka service
+keytool -genkeypair -alias eureka -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+
+keytool -export -keystore keystore.p12 -alias eureka -file eureka.crt
+
+keytool -import -alias auth -file ./account.crt -keystore ./cacerts -storePass black123
+
+
+/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security

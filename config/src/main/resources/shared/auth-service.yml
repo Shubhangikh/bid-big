@@ -3,7 +3,7 @@ security:
     client:
       clientId: auth-service
       clientSecret: ${AUTH_SERVICE_PASSWORD}
-      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      accessTokenUri: https://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
     resource:
@@ -36,6 +36,13 @@ server:
   servlet:
     context-path: /uaa
   port: 5000
+  ssl:
+    enabled: true
+    key-store: classpath:auth.p12
+    key-store-password: black123
+    trust-store: classpath:cacerts
+    trust-store-password: black123
+    key-alias: auth 
 
 feign:
   okhttp:
