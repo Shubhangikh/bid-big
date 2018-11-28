@@ -1,16 +1,20 @@
 package com.piggymetrics.auction.domain;
 
 import java.util.Date;
-import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.joda.time.DateTime;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "auction")
-public class Auction {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Auction implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
