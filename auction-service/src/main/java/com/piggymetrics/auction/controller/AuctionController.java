@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hazelcast.core.HazelcastInstance;
+
 import java.util.List;
 
 @RestController
@@ -22,6 +24,9 @@ public class AuctionController {
 	@Autowired
 	private AuctionService auctionService;
 
+	@Autowired
+	HazelcastInstance hazelInstance;
+
 	@RequestMapping(path = "/create", method = RequestMethod.POST)
 	public void createAuction(@Valid @RequestBody AuctionRequest request) {
 		auctionService.createAuctions( request);
@@ -29,6 +34,8 @@ public class AuctionController {
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
 	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
+		// System.out.println("Connnected clients ----------------");
+		// System.out.println(hazelInstance.getClientService().getConnectedClients());
 		return auctionService.listAuctions( request);
 	}
 
