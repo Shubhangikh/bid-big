@@ -47,5 +47,11 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    items-service:
+        path: /items/**
+        serviceId: items-service
+        stripPrefix: false
+        sensitiveHeaders:
+
 server:
   port: 4000
