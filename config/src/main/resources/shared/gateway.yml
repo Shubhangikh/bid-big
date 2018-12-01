@@ -10,6 +10,11 @@ ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
   IsSecure: true
+  # key-store: classpath:gateway.p12
+  # key-store-password: black123
+  # trust-store: classpath:cacerts
+  # trust-store-password: black123
+  # key-alias: gateway
 
 zuul:
   ignoredServices: '*'
@@ -26,7 +31,7 @@ zuul:
 
     account-service:
         path: /accounts/**
-        serviceId: account-service
+        url: https://account-service:6000
         stripPrefix: false
         sensitiveHeaders:
 
@@ -51,9 +56,9 @@ zuul:
 server:
   port: 4000
   ssl:
-    enabled: true
-    key-store: classpath:gateway.p12
-    key-store-password: black123
-    trust-store: classpath:cacerts
-    trust-store-password: black123
-    key-alias: gateway
+    enabled: false
+    # key-store: classpath:gateway.p12
+    # key-store-password: black123
+    # trust-store: classpath:truststore.jks
+    # trust-store-type: JKS
+    # trust-store-password: changeit

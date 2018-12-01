@@ -1,23 +1,23 @@
 For account service
-keytool -genkeypair -alias account -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+keytool -genkeypair -alias account-service -keyalg RSA -keysize 2048 -storetype JKS -keystore keystore.jks -validity 3650
 
-keytool -export -keystore keystore.p12 -alias auth -file account.crt
+keytool -export -alias account-service -storepass black123 -file account.cer -keystore keystore.jks
 
-keytool -import -alias account -file ./account.crt -keystore ./cacerts -storePass black123
+keytool -import -file account.cer -alias account-service -keystore truststore.jks -storepass changeit
 
 For auth service
-keytool -genkeypair -alias auth -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+keytool -genkeypair -alias auth-service -keyalg RSA -keysize 2048 -storetype JKS -keystore keystore-auth.jks -validity 3650
 
-keytool -export -keystore keystore.p12 -alias auth -file auth.crt
+keytool -export -alias auth-service -storepass black123 -file auth.cer -keystore keystore-auth.jks
 
-keytool -import -alias auth -file ./account.crt -keystore ./cacerts -storePass black123
+keytool -import -file auth.cer -alias auth-service -keystore truststore.jks -storepass changeit
 
 For eureka service
-keytool -genkeypair -alias eureka -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650
+keytool -genkeypair -alias registry -keyalg RSA -keysize 2048 -storetype JKS -keystore keystore-eureka.jks -validity 3650
 
-keytool -export -keystore keystore.p12 -alias eureka -file eureka.crt
+keytool -export -alias registry -storepass black123 -file eureka.cer -keystore keystore-eureka.jks
 
-keytool -import -alias auth -file ./account.crt -keystore ./cacerts -storePass black123
+keytool -import -file eureka.cer -alias registry -keystore truststore.jks -storepass changeit
 
 
 /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security

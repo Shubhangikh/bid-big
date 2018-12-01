@@ -43,11 +43,13 @@ server:
   port: 6000
   ssl:
     enabled: true
-    key-store: classpath:account.p12
+    key-store: classpath:keystore.jks
     key-store-password: black123
-    trust-store: classpath:cacerts
-    trust-store-password: black123
-    key-alias: account
+    key-store-type: JKS
+    trust-store: classpath:truststore.jks
+    trust-store-type: JKS
+    trust-store-password: changeit
+    key-alias: account-service
 
 feign:
   hystrix:

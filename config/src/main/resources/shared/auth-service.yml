@@ -38,11 +38,13 @@ server:
   port: 5000
   ssl:
     enabled: true
-    key-store: classpath:auth.p12
+    key-store: classpath:keystore-auth.jks
     key-store-password: black123
-    trust-store: classpath:cacerts
-    trust-store-password: black123
-    key-alias: auth 
+    key-store-type: JKS
+    trust-store: classpath:truststore.jks
+    trust-store-type: JKS
+    trust-store-password: changeit
+    key-alias: auth-service
 
 feign:
   okhttp:
