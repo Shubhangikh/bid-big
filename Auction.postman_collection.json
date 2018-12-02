@@ -265,7 +265,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 9e3322ec-84d3-472a-9786-a91d397fcad1",
+						"value": "Bearer b20eb2b2-eb6e-4cbd-b8f4-c5ebb3cad074",
 						"type": "text"
 					},
 					{
@@ -277,7 +277,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"auctionDate\": 1542925088056,\n\t\"startTime\": 1542902400000,\n\t\"endTime\": 1542931200000,\n\t\"slots\": 8\n\t\n}"
+					"raw": "{\n\t\"auctionDate\": 1543449600000,\n\t\"startTime\": 1543420800000,\n\t\"endTime\": 1543449600000,\n\t\"slots\": 8\n\t\n}"
 				},
 				"url": {
 					"raw": "localhost/auctions/create",
@@ -330,7 +330,7 @@
 			"response": []
 		},
 		{
-			"name": "Login",
+			"name": "Login Direct",
 			"request": {
 				"auth": {
 					"type": "noauth"

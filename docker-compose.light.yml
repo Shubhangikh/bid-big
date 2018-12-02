@@ -106,6 +106,21 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  bidding:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      BIDDING_PASSWORD: $BIDDING_PASSWORD
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+    image: sqshq/piggymetrics-bidding-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   notification-mongodb:
     image: sqshq/piggymetrics-mongodb
     restart: always
@@ -134,7 +149,7 @@ services:
     ports:
     - "5432:5432"
     environment:
-      POSTGRES_MULTIPLE_DATABASES: 'liveauction,liveauctionauth,liveauctionauction'
+      POSTGRES_MULTIPLE_DATABASES: 'liveauction,liveauctionauth,liveauctionauction,liveauctionbid'
       POSTGRES_PASSWORD: $POSTGRESQL_PASSWORD
       POSTGRES_USER: postgres
 

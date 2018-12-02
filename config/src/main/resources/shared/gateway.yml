@@ -41,6 +41,12 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    bidding:
+      path: /bids/**
+      serviceId: bidding
+      stripPrefix: false
+      sensitiveHeaders:
+
     auction-service:
         path: /auctions/**
         serviceId: auction-service
