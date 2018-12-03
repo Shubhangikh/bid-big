@@ -1,23 +1,16 @@
-// package com.piggymetrics.notification.repository;
+package com.piggymetrics.bidding.repository;
 
-// import com.piggymetrics.notification.domain.Recipient;
-// import org.springframework.data.mongodb.repository.Query;
-// import org.springframework.data.repository.CrudRepository;
-// import org.springframework.stereotype.Repository;
+import com.piggymetrics.bidding.domain.Bid;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// import java.util.List;
+import java.util.List;
 
-// @Repository
-// public interface RecipientRepository extends CrudRepository<Recipient, String> {
+@Repository
+public interface BiddingRepository extends JpaRepository<Bid, Long> {
 
-// 	Recipient findByAccountName(String name);
+    public List<Bid> findByItemId(int id);
 
-// 	@Query("{ $and: [ {'scheduledNotifications.BACKUP.active': true }, { $where: 'this.scheduledNotifications.BACKUP.lastNotified < " +
-// 			"new Date(new Date().setDate(new Date().getDate() - this.scheduledNotifications.BACKUP.frequency ))' }] }")
-// 	List<Recipient> findReadyForBackup();
+    public Bid findTopByAuctionIdOrderByAmountDesc(int auctionId);
 
-// 	@Query("{ $and: [ {'scheduledNotifications.REMIND.active': true }, { $where: 'this.scheduledNotifications.REMIND.lastNotified < " +
-// 			"new Date(new Date().setDate(new Date().getDate() - this.scheduledNotifications.REMIND.frequency ))' }] }")
-// 	List<Recipient> findReadyForRemind();
-
-// }
+}

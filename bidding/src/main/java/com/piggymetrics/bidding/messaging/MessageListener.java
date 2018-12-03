@@ -10,16 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import com.piggymetrics.bidding.domain.BidMessage;
 
+import com.piggymetrics.bidding.service.BidService;
+
 
 @Service
 public class MessageListener {
 
-    private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
+	private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
+	
+	@Autowired
+	private BidService bidService;
    
     @RabbitListener(queues = "${exchange.messageQueue}")
     public void receiveMessageForBid(final BidMessage msg) {
     	log.info("Received message: {} from msg queue.", msg);
-    	
+		bidService.persistBid(msg);
     	// try {
     	// 	log.info("Making REST call to the API");
     	// 	//TODO: Code to make REST call

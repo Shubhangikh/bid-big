@@ -1,0 +1,43 @@
+POST Bid
+http://localhost/bids/new
+payload json
+{
+	"userId": 3,
+	"auctionId": 1,
+	"itemId": 1,
+	"amount": 78,
+	"created": 1543806960242
+}
+
+Response 200 OK
+
+
+Highest bid GET
+http://localhost/bids/highest/{auctionId}
+
+Response
+78
+
+All bid for item GET
+http://localhost/bids/all/{itemId}
+Response
+[
+    {
+        "userId": 3,
+        "auctionId": 1,
+        "itemId": 1,
+        "amount": 68,
+        "status": "PENDING",
+        "created": "2018-12-03T03:16:00.242Z"
+    },
+    {
+        "userId": 3,
+        "auctionId": 1,
+        "itemId": 1,
+        "amount": 78,
+        "status": "PENDING",
+        "created": "2018-12-03T03:16:00.242Z"
+    }
+]
+
+
