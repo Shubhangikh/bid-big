@@ -21,7 +21,7 @@ public class Bid implements Serializable{
 
     @Column
     @NotNull
-    private int userId;
+    private String userId;
 	
     @Column
     @NotNull	
@@ -44,11 +44,11 @@ public class Bid implements Serializable{
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime created;
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

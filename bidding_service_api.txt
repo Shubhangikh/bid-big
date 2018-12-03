@@ -2,7 +2,7 @@ POST Bid
 http://localhost/bids/new
 payload json
 {
-	"userId": 3,
+	"userId": "uj89",
 	"auctionId": 1,
 	"itemId": 1,
 	"amount": 78,
@@ -23,7 +23,7 @@ http://localhost/bids/all/{itemId}
 Response
 [
     {
-        "userId": 3,
+        "userId": "uj80",
         "auctionId": 1,
         "itemId": 1,
         "amount": 68,
@@ -31,7 +31,7 @@ Response
         "created": "2018-12-03T03:16:00.242Z"
     },
     {
-        "userId": 3,
+        "userId": "uj89",
         "auctionId": 1,
         "itemId": 1,
         "amount": 78,

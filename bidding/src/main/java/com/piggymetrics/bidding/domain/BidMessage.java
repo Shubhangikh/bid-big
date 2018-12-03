@@ -15,7 +15,7 @@ public final class BidMessage implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("userId")
-    private int userId;
+    private String userId;
 	
 	@JsonProperty("auctionId")
     private int auctionId;
@@ -33,7 +33,7 @@ public final class BidMessage implements Serializable{
     public BidMessage() {
     }
 
-    public BidMessage(int userId, int auctionId,  int itemId, double amount, Date created) {
+    public BidMessage(String userId, int auctionId,  int itemId, double amount, Date created) {
         this.userId = userId;
         this.auctionId = auctionId;
 		this.itemId = itemId;
@@ -41,11 +41,11 @@ public final class BidMessage implements Serializable{
 		this.created = created;
     }
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
