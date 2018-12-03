@@ -53,10 +53,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
     }
 
-    // @Override
-    // public void configure(HttpSecurity http) throws Exception {
-    //     http.authorizeRequests()
-    //             .antMatchers("/reset").permitAll()
-    //             .anyRequest().authenticated();
-    // }
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/new").permitAll()
+                .anyRequest().authenticated();
+    }
 }
