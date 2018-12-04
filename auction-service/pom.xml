@@ -10,8 +10,8 @@
 	<name>auction-service</name>
 
 	<parent>
-		<groupId>com.piggymetrics</groupId>
-		<artifactId>piggymetrics</artifactId>
+		<groupId>com.bidbig</groupId>
+		<artifactId>bidbig</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
