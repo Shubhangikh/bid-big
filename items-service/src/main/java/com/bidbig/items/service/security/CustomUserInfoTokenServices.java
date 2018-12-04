@@ -1,4 +1,4 @@
-package com.piggymetrics.auction.service.security;
+package com.bidbig.items.service.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

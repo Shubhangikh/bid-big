@@ -20,15 +20,15 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
 import org.springframework.cache.CacheManager;
 
-@SpringBootApplication(scanBasePackages={"com.bidbig.items"})
-@EnableConfigurationProperties({
-        ImageStorageProperties.class
-})
+@SpringBootApplication
 @EnableDiscoveryClient
 @EnableOAuth2Client
 @EnableCaching
 // @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
+@EnableConfigurationProperties({
+        ImageStorageProperties.class
+})
 public class ItemsApplication {
 
     public static void main(String[] args) {

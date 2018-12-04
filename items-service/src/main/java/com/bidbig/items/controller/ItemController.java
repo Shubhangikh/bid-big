@@ -28,7 +28,6 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/")
 public class ItemController {
     @Autowired
     ImageStorageService imageStorageService;
@@ -38,7 +37,7 @@ public class ItemController {
     ObjectMapper objectMapper;
 
     @Transactional
-    @RequestMapping(value = "item", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    @RequestMapping(value = "/item", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     @ResponseBody
     public ResponseEntity<?> create(@Valid @RequestPart("item") ItemDto itemDto,
                                     @RequestPart("image")
@@ -56,7 +55,7 @@ public class ItemController {
     }
 
     @Transactional
-    @RequestMapping(value = "item/{itemId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/item/{itemId}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable("itemId") String itemId, @RequestBody @Valid ItemDto itemDto,
                 @RequestParam(value = "image", required = false) MultipartFile image) {
         String fileName = imageStorageService.storeImage(image, itemDto.getUserId());
@@ -71,7 +70,7 @@ public class ItemController {
     }
 
     @Transactional
-    @RequestMapping(value = "item/{itemId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/item/{itemId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("itemId") String itemId) throws JsonProcessingException {
         if(itemService.deleteItem(Integer.parseInt(itemId))) {
             return ResponseEntity.noContent().build();
@@ -82,8 +81,8 @@ public class ItemController {
 
     }
 
-    @Transactional
-    @RequestMapping(value = "page/{userId}", method = RequestMethod.GET)
+    // @Transactional
+    @RequestMapping(value = "/page/{userId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllItems(@PathVariable("userId") String userId, Pageable pageable) {
         Page<Item> results = itemService.getPageOfItems(Integer.parseInt(userId), pageable);
         return ResponseEntity.ok(results);

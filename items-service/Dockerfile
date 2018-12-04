@@ -1,6 +1,6 @@
 FROM java:8-jre
 
 ADD ./target/items-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/items-service.jar"]
+CMD java ${JAVA_OPTS} -Xmx200m -jar /app/items-service.jar
 
 EXPOSE 8010
