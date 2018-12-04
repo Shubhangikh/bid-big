@@ -1,7 +1,9 @@
-package com.bidbig.auction;
+package com.bidbig.items;
 
-
-import org.springframework.core.env.Environment;
+import com.bidbig.items.property.ImageStorageProperties;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,21 +20,21 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
 import org.springframework.cache.CacheManager;
 
-
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.bidbig.items"})
+@EnableConfigurationProperties({
+        ImageStorageProperties.class
+})
 @EnableDiscoveryClient
 @EnableOAuth2Client
 @EnableCaching
 // @EnableFeignClients
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
-public class AuctionServiceApplication {
+public class ItemsApplication {
 
-	@Autowired
-	private Environment env;
-	public static void main(String[] args) {
-		SpringApplication.run(AuctionServiceApplication.class, args);
-	}
-	
+    public static void main(String[] args) {
+        SpringApplication.run(ItemsApplication.class, args);
+    }
+
 
 	@Bean
 	HazelcastInstance hazelcastInstance() {
@@ -46,5 +48,4 @@ public class AuctionServiceApplication {
 	CacheManager cacheManager() {
 	 return new HazelcastCacheManager(hazelcastInstance());
 	}
-
 }

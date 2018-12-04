@@ -49,3 +49,8 @@ services:
     build: auction-service
     ports:
       - 8001:8001
+
+  items-service:
+    build: items-service
+    ports:
+      - 8002:8002
