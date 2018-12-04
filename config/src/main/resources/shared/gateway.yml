@@ -21,6 +21,8 @@ zuul:
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
+  debug:
+    request: true
 
   routes:
     auth-service:
@@ -70,4 +72,4 @@ server:
     # trust-store-password: changeit
   compression:
     enabled: true
-    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,image/gif,image/jpeg
+    mime-types: text/css,application/json,application/xml,text/html,text/xml,text/plain,application/javascript,image/gif,image/jpeg

@@ -38,6 +38,12 @@ feign:
       default:
         connectTimeout: 20000
         readTimeout: 20000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
 
 management:
   endpoints:
@@ -47,3 +53,8 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,image/gif,image/jpeg
