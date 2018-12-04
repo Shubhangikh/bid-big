@@ -8,13 +8,34 @@ security:
       scope: server
 
 spring:
-  data:
-    mongodb:
-      host: account-mongodb
-      username: user
-      password: ${MONGODB_PASSWORD}
-      database: piggymetrics
-      port: 27017
+  # data:
+  #   mongodb:
+  #     host: account-mongodb
+  #     username: user
+  #     password: ${MONGODB_PASSWORD}
+  #     database: piggymetrics
+  #     port: 27017
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/liveauction
+    username: postgres
+    password: ${POSTGRESQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+      properties:
+        hibernate:
+          temp:
+            use_jdbc_metadata_defaults: false
+      hibernate:
+        ddl-auto: update
+        jdbc:
+          lob:
+            non_contextual_creation: true
+      show-sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: false
+
 
 server:
   servlet:
@@ -23,4 +44,6 @@ server:
 
 feign:
   hystrix:
+    enabled: true
+  okhttp:
     enabled: true

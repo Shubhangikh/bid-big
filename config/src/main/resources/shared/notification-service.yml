@@ -18,6 +18,11 @@ remind:
     text: "Hey, {0}! We''ve missed you here on PiggyMetrics. It''s time to check your budget statistics.\r\n\r\nCheers,\r\nPiggyMetrics team"
     subject: PiggyMetrics reminder
 
+reset:
+  email:
+    text: "Please click on the following link to reset your password {0}"
+    subject: Password Reset
+
 backup:
   cron: 0 0 12 * * *
   email:
@@ -36,8 +41,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 465
-    username: dev-user
-    password: dev-password
+    username: ugomishra
+    password: newlifenewworld123
     properties:
       mail:
         smtp:

@@ -1,4 +1,4 @@
-package com.piggymetrics.gateway;
+package com.bidbig.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

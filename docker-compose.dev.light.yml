@@ -1,5 +1,9 @@
 version: '2.1'
 services:
+  rabbitmq:
+    ports:
+      - 5672:5672
+
   config:
     build: config
     ports:
@@ -16,17 +20,37 @@ services:
     ports:
       - 5000:5000
 
-  auth-mongodb:
-    build: mongodb
-    ports:
-      - 25000:27017
+  # auth-mongodb:
+  #   build: mongodb
+  #   ports:
+  #     - 25000:27017
 
   account-service:
     build: account-service
     ports:
       - 6000:6000
 
-  account-mongodb:
+  notification-service:
+    build: notification-service
+    ports:
+      - 8000:8000
+
+  bidding:
+    build: bidding
+    ports:
+      - 8050:8050
+
+  notification-mongodb:
     build: mongodb
     ports:
-      - 26000:27017
+      - 28000:27017
+
+  auction-service:
+    build: auction-service
+    ports:
+      - 8001:8001
+
+  items-service:
+    build: items-service
+    ports:
+      - 8002:8002

@@ -10,8 +10,8 @@
 	<name>account-service</name>
 
 	<parent>
-		<groupId>com.piggymetrics</groupId>
-		<artifactId>piggymetrics</artifactId>
+		<groupId>com.bidbig</groupId>
+		<artifactId>bidbig</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
@@ -44,9 +44,22 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency> -->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,16 +78,21 @@
 			<artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.netflix.feign</groupId>
+			<artifactId>feign-okhttp</artifactId>
+			<version>8.18.0</version>
+		</dependency>		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>de.flapdoodle.embed</groupId>
 			<artifactId>de.flapdoodle.embed.mongo</artifactId>
 			<version>1.50.3</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>

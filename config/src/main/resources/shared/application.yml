@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
 
 hystrix:
   command:
@@ -8,7 +8,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 20000
 
 eureka:
   instance:
@@ -25,3 +25,19 @@ security:
 spring:
   rabbitmq:
     host: rabbitmq
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 20000
+        readTimeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS
