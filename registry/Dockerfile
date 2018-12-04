@@ -1,5 +1,4 @@
 FROM java:8-jre
-MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
 
 ADD ./target/registry.jar /app/
 COPY truststore.jks /app/

@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
 
 hystrix:
   command:
@@ -38,3 +38,12 @@ feign:
       default:
         connectTimeout: 20000
         readTimeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #<2>
+  endpoint:
+    health:
+      show-details: ALWAYS

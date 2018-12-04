@@ -13,7 +13,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-config
+    image: bidbig/piggymetrics-config
     restart: always
     logging:
       options:
@@ -23,7 +23,7 @@ services:
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-registry
+    image: bidbig/piggymetrics-registry
     restart: always
     depends_on:
       config:
@@ -38,7 +38,7 @@ services:
   gateway:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-gateway
+    image: bidbig/piggymetrics-gateway
     restart: always
     depends_on:
       config:
@@ -55,7 +55,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
-    image: sqshq/piggymetrics-auth-service
+    image: bidbig/piggymetrics-auth-service
     restart: always
     depends_on:
       config:
@@ -68,7 +68,7 @@ services:
   # auth-mongodb:
   #   environment:
   #     MONGODB_PASSWORD: $MONGODB_PASSWORD
-  #   image: sqshq/piggymetrics-mongodb
+  #   image: bidbig/piggymetrics-mongodb
   #   restart: always
   #   logging:
   #     options:
@@ -81,7 +81,7 @@ services:
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
-    image: sqshq/piggymetrics-account-service
+    image: bidbig/piggymetrics-account-service
     restart: always
     depends_on:
       config:
@@ -96,7 +96,22 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-notification-service
+    image: bidbig/piggymetrics-notification-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  bidding:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      BIDDING_PASSWORD: $BIDDING_PASSWORD
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+    image: bidbig/piggymetrics-bidding-service
     restart: always
     depends_on:
       config:
@@ -107,7 +122,7 @@ services:
         max-file: "10"
 
   notification-mongodb:
-    image: sqshq/piggymetrics-mongodb
+    image: bidbig/piggymetrics-mongodb
     restart: always
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
@@ -120,7 +135,7 @@ services:
   #   environment:
   #     INIT_DUMP: account-service-dump.js
   #     MONGODB_PASSWORD: $MONGODB_PASSWORD
-  #   image: sqshq/piggymetrics-mongodb
+  #   image: bidbig/piggymetrics-mongodb
   #   restart: always
   #   logging:
   #     options:
@@ -134,16 +149,17 @@ services:
     ports:
     - "5432:5432"
     environment:
-      POSTGRES_MULTIPLE_DATABASES: 'liveauction,liveauctionauth,liveauctionauction'
+      POSTGRES_MULTIPLE_DATABASES: 'liveauction,liveauctionauth,liveauctionauction,liveauctionbid,liveauctionitems'
       POSTGRES_PASSWORD: $POSTGRESQL_PASSWORD
       POSTGRES_USER: postgres
 
   auction-service:
-    image: sqshq/piggymetrics-auction
+    image: bidbig/piggymetrics-auction
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      AUCTION_SERVICE_PASSWORD: $AUCTION_SERVICE_PASSWORD
-      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+      - JAVA_OPTS=-Dhazelcast.member.address=hazelcast -Dgroup.name=hz-compose -Dgroup.password=s3crEt 
+      - CONFIG_SERVICE_PASSWORD=$CONFIG_SERVICE_PASSWORD
+      - AUCTION_SERVICE_PASSWORD=$AUCTION_SERVICE_PASSWORD
+      - POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
     restart: always
     depends_on:
       config:
@@ -153,3 +169,42 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  items-service:
+    image: bidbig/piggymetrics-items
+    environment:
+      - JAVA_OPTS=-Dhazelcast.member.address=hazelcast -Dgroup.name=hz-compose -Dgroup.password=s3crEt 
+      - CONFIG_SERVICE_PASSWORD=$CONFIG_SERVICE_PASSWORD
+      - ITEMS_SERVICE_PASSWORD=$ITEMS_SERVICE_PASSWORD
+      - POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  hazelcast:
+    image: hazelcast/hazelcast
+    volumes:
+      - ./hazlecast:/configFolder
+    environment:
+      - JAVA_OPTS=-Dhazelcast.config=/configFolder/hazelcast.xml -Dhazelcast.mancenter.url=http://mancenter:8080/hazelcast-mancenter -Dgroup.name=hz-compose -Dgroup.password=s3crEt
+    # ports:
+    #   - 5701:5701
+    links:
+      - "mancenter:mancenter"  
+
+  mancenter:
+    image: hazelcast/management-center
+    # persisting mancenter users db folder to local disk
+    volumes:
+      - ~/mancenter3.8:/mancenter-3.8
+    environment:
+      - MANCENTER_DATA=/mancenter-3.8
+        # enable REST interface on management center
+        # http://docs.hazelcast.org/docs/latest-development/manual/html/Management/Clustered_REST_via_Management_Center.html
+      - JAVA_OPTS=-Dhazelcast.mc.rest.enabled=true
+    ports:
+      - 8080:8080

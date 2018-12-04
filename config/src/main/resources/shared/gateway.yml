@@ -35,21 +35,27 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
-    statistics-service:
-        path: /statistics/**
-        serviceId: statistics-service
-        stripPrefix: false
-        sensitiveHeaders:
-
     notification-service:
         path: /notifications/**
         serviceId: notification-service
         stripPrefix: false
         sensitiveHeaders:
 
+    bidding:
+      path: /bids/**
+      serviceId: bidding
+      stripPrefix: false
+      sensitiveHeaders:
+
     auction-service:
         path: /auctions/**
         serviceId: auction-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    items-service:
+        path: /items/**
+        serviceId: items-service
         stripPrefix: false
         sensitiveHeaders:
 
@@ -62,3 +68,6 @@ server:
     # trust-store: classpath:truststore.jks
     # trust-store-type: JKS
     # trust-store-password: changeit
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,image/gif,image/jpeg

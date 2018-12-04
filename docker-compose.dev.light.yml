@@ -35,6 +35,11 @@ services:
     ports:
       - 8000:8000
 
+  bidding:
+    build: bidding
+    ports:
+      - 8050:8050
+
   notification-mongodb:
     build: mongodb
     ports:
@@ -44,3 +49,8 @@ services:
     build: auction-service
     ports:
       - 8001:8001
+
+  items-service:
+    build: items-service
+    ports:
+      - 8002:8002
