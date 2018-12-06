@@ -41,3 +41,46 @@ Response
 ]
 
 
+Login
+http://localhost/uaa/oauth/token  
+url-encoded form post {username, password, grant_type=password}
+Heaaders
+Authorization : Basic XYZABsdsd
+
+Response
+{
+    "access_token": "66168c84-4cd0-40c2-9ce4-73b7607f36bb",
+    "token_type": "bearer",
+    "refresh_token": "63779bb3-0017-47e3-a443-cca8397d665d",
+    "expires_in": 43199,
+    "scope": "ui"
+}
+
+Register
+https://localhost:6000/accounts/
+Request JSON
+{
+	"user" :{
+		"username": "uja9",
+		"password": "black@123",
+		"email": "umishra1771@gmail.com"
+	},
+	"profile": {
+		"name": "Ujjwal",
+		"address":"NOP",
+		"city": "Dallas",
+		"zip": 75252
+	}
+}
+Response
+{
+    "name": "uja9",
+    "lastSeen": "2018-12-06T02:36:14.322+0000",
+    "profile": {
+        "id": 0,
+        "name": "Ujjwal",
+        "address": "NOP",
+        "city": "Dallas",
+        "zip": 75252
+    }
+}

@@ -12,8 +12,9 @@ ribbon:
   IsSecure: true
   # key-store: classpath:gateway.p12
   # key-store-password: black123
-  # trust-store: classpath:cacerts
-  # trust-store-password: black123
+  trust-store: classpath:localhost.p12
+  trust-store-password: black123
+  trust-store-type: PKCS12
   # key-alias: gateway
 
 zuul:
@@ -39,34 +40,35 @@ zuul:
 
     notification-service:
         path: /notifications/**
-        serviceId: notification-service
+        url: https://notification-service:8000
         stripPrefix: false
         sensitiveHeaders:
 
     bidding:
       path: /bids/**
-      serviceId: bidding
+      url: https://bidding:8050
       stripPrefix: false
       sensitiveHeaders:
 
     auction-service:
         path: /auctions/**
-        serviceId: auction-service
+        serviceId: https://auction-service:8001
         stripPrefix: false
         sensitiveHeaders:
 
     items-service:
         path: /items/**
-        serviceId: items-service
+        serviceId: https://items-service:8002
         stripPrefix: false
         sensitiveHeaders:
 
 server:
   port: 4000
   ssl:
-    enabled: false
-    # key-store: classpath:gateway.p12
-    # key-store-password: black123
+    enabled: true
+    key-store: classpath:localhost.p12
+    key-store-password: black123
+    key-store-type: PKCS12
     # trust-store: classpath:truststore.jks
     # trust-store-type: JKS
     # trust-store-password: changeit

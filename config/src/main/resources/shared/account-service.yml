@@ -46,9 +46,9 @@ server:
     key-store: classpath:keystore.jks
     key-store-password: black123
     key-store-type: JKS
-    trust-store: classpath:truststore.jks
-    trust-store-type: JKS
-    trust-store-password: changeit
+    # trust-store: classpath:truststore.jks
+    # trust-store-type: JKS
+    # trust-store-password: changeit
     key-alias: account-service
 
 feign:

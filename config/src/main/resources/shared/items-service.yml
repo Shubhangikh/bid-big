@@ -3,7 +3,7 @@ security:
     client:
       clientId: items-service
       clientSecret: ${ITEMS_SERVICE_PASSWORD}
-      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      accessTokenUri: https://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 
@@ -11,6 +11,15 @@ server:
   servlet:
     context-path: /items
   port: 8002
+  ssl:
+    enabled: true
+    key-store: classpath:keystore-items.jks
+    key-store-password: black123
+    key-store-type: JKS
+    # trust-store: classpath:truststore.jks
+    # trust-store-type: JKS
+    # trust-store-password: changeit
+    key-alias: items-service
 
 spring:
   datasource:

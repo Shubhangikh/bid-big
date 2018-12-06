@@ -45,14 +45,14 @@ feign:
       enabled: true
 
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"  #<2>
-  endpoint:
-    health:
-      show-details: ALWAYS
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include: "*"  #<2>
+#   endpoint:
+#     health:
+#       show-details: ALWAYS
 
 server:
   compression:
