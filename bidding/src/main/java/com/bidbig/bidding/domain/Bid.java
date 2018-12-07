@@ -13,6 +13,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "bid")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Bid implements Serializable{
 
     @Id

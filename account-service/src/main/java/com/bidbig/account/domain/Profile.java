@@ -7,13 +7,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 @Table(name = "profile")
-public class Profile {
+public class Profile implements Serializable {
 
 	@Id
 	@GeneratedValue

@@ -77,7 +77,9 @@ public class AccountServiceImpl implements AccountService {
 		Assert.notNull(account, "can't find account with name " + name);
 
 		account.setLastSeen(new Date());
-		account.setProfile(update.getProfile());
+		Profile profile = update.getProfile();
+		profile.setAccount(update);
+		account.setProfile(profile);
 		repository.save(account);
 
 		log.debug("account {} changes has been saved", name);

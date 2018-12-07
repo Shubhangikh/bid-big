@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.bidbig.auth.domain.*;
 
 
-@FeignClient(name = "notification-service")
+@FeignClient(name = "notification-service", url = "https://notification-service:8000")
 public interface NotificationServiceClient {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/notifications/reset", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

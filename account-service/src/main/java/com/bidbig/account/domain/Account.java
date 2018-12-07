@@ -1,12 +1,16 @@
 package com.bidbig.account.domain;
 
 import java.util.Date;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
-public class Account {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Account implements Serializable{
 
     @Id
 	private String name;

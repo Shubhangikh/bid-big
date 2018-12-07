@@ -24,10 +24,18 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.beans.factory.annotation.Value;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.client.config.XmlClientConfigBuilder;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.spring.cache.HazelcastCacheManager;
+import org.springframework.cache.CacheManager;
 
 import java.util.Arrays;
 
@@ -35,6 +43,7 @@ import java.util.Arrays;
 @EnableDiscoveryClient
 @EnableOAuth2Client
 @EnableRabbit
+@EnableCaching
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class BiddingApplication implements RabbitListenerConfigurer {
 
@@ -117,5 +126,16 @@ public class BiddingApplication implements RabbitListenerConfigurer {
 		registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
 	}
 
+	@Bean
+	HazelcastInstance hazelcastInstance() {
 
+		ClientConfig clientConfig = new XmlClientConfigBuilder().build();
+        final HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+
+	 return client;
+	}
+	@Bean
+	CacheManager cacheManager() {
+	 return new HazelcastCacheManager(hazelcastInstance());
+	}
 }

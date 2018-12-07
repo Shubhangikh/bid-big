@@ -50,5 +50,5 @@ feign:
   okhttp:
     enabled: true
 
-domain: http://localhost/
+domain: https://localhost/
 

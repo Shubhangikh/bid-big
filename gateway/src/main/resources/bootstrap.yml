@@ -8,10 +8,9 @@ spring:
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
 debug: true
-trace: true
 logging:
   level:
     org:
       springframework:
         cloud:
-          netflix: trace
+          netflix: debug

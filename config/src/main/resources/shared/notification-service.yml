@@ -62,3 +62,4 @@ spring:
             fallback: false
           ssl:
             enable: true
+            trust: smtp.gmail.com

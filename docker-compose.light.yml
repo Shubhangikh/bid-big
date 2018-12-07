@@ -77,10 +77,11 @@ services:
 
   account-service:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+      - JAVA_OPTS=-Dhazelcast.member.address=hazelcast -Dgroup.name=hz-compose -Dgroup.password=s3crEt 
+      - CONFIG_SERVICE_PASSWORD=$CONFIG_SERVICE_PASSWORD
+      - ACCOUNT_SERVICE_PASSWORD=$ACCOUNT_SERVICE_PASSWORD
+      - MONGODB_PASSWORD=$MONGODB_PASSWORD
+      - POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
     image: bidbig/piggymetrics-account-service
     restart: always
     depends_on:
@@ -108,9 +109,10 @@ services:
 
   bidding:
     environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      BIDDING_PASSWORD: $BIDDING_PASSWORD
-      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+      - JAVA_OPTS=-Dhazelcast.member.address=hazelcast -Dgroup.name=hz-compose -Dgroup.password=s3crEt 
+      - CONFIG_SERVICE_PASSWORD= $CONFIG_SERVICE_PASSWORD
+      - BIDDING_PASSWORD= $BIDDING_PASSWORD
+      - POSTGRESQL_PASSWORD= $POSTGRESQL_PASSWORD
     image: bidbig/piggymetrics-bidding-service
     restart: always
     depends_on:
