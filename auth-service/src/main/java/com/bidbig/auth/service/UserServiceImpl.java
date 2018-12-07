@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	private NotificationServiceClient notificationClient;
 
 	@Override
-	public User create(User user) {
+	public void create(User user) {
 
 		Optional<User> existing = repository.findById(user.getUsername());
 
@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
 
 		log.info("new user has been created: {}", user.getUsername());
 
-		return user;
 	}
 
 	@Override

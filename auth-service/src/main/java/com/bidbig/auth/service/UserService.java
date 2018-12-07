@@ -5,7 +5,7 @@ import com.bidbig.auth.domain.User;
 
 public interface UserService {
 
-	User create(User user);
+	void create(User user);
 
 	void resetPassword(User user);
 

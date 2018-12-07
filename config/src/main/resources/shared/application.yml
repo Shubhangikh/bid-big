@@ -1,6 +1,7 @@
 logging:
   level:
     org.springframework.security: DEBUG
+    com.bidbig.account.client.AuthServiceClient: DEBUG
 
 hystrix:
   command:
@@ -36,11 +37,12 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 20000
-        readTimeout: 20000
+        connectTimeout: 30000
+        readTimeout: 30000
   compression:
     request:
       enabled: true
+      mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,image/gif,image/jpeg
     response:
       enabled: true
 

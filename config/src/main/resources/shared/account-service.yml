@@ -54,5 +54,5 @@ server:
 feign:
   hystrix:
     enabled: true
-  okhttp:
-    enabled: true
+  # okhttp:
+  #   enabled: true
