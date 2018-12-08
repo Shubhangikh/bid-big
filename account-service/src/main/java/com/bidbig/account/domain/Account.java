@@ -3,6 +3,7 @@ package com.bidbig.account.domain;
 import java.util.Date;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +20,9 @@ public class Account implements Serializable{
 
 	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, optional = false)
 	private Profile profile;
+
+	@Email
+	private String email;
 
 
 	public String getName() {
@@ -43,6 +47,14 @@ public class Account implements Serializable{
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

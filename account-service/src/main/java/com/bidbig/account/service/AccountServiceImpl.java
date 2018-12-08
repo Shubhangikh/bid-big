@@ -56,6 +56,7 @@ public class AccountServiceImpl implements AccountService {
 
 		Account account = new Account();
 		account.setName(user.getUsername());
+		account.setEmail(user.getEmail());
 		account.setLastSeen(new Date());
 		profile.setAccount(account);
 		account.setProfile(profile);
