@@ -32,8 +32,8 @@ public class Item {
     @Column(name = "MIN_BID_PRICE", nullable = false, columnDefinition = "Numeric(10,2)")
     private double minBidPrice;
 
-    @Column(name = "USER_ID", nullable = false, length = 10)
-    private int userId;
+    @Column(name = "USERNAME", nullable = false)
+    private String username;
 
     @Column(name = "STATUS", nullable = false, length = 1, columnDefinition = "SMALLINT")
     private short status;
