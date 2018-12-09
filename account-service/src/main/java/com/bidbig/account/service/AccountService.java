@@ -30,5 +30,5 @@ public interface AccountService {
 	 * @param name
 	 * @param update
 	 */
-	void saveChanges(String name, Account update);
+	Account saveChanges(String name, Account update);
 }
