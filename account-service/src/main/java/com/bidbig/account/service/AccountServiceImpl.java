@@ -6,6 +6,7 @@ import com.bidbig.account.domain.Profile;
 import com.bidbig.account.domain.Register;
 import com.bidbig.account.domain.User;
 import com.bidbig.account.repository.AccountRepository;
+import com.bidbig.account.repository.ProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository repository;
+
+	@Autowired
+	private ProfileRepository proRepository;
 
 	/**
 	 * {@inheritDoc}
@@ -72,17 +76,19 @@ public class AccountServiceImpl implements AccountService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveChanges(String name, Account update) {
+	public Account saveChanges(String name, Account update) {
 
 		Account account = repository.findByName(name);
 		Assert.notNull(account, "can't find account with name " + name);
 
 		account.setLastSeen(new Date());
 		Profile profile = update.getProfile();
-		profile.setAccount(update);
-		account.setProfile(profile);
-		repository.save(account);
+		profile.setAccount(account);
+		update.setName(name);
+		repository.save(update);
+		proRepository.save(profile);
 
 		log.debug("account {} changes has been saved", name);
+		return update;
 	}
 }
