@@ -10,3 +10,5 @@ spring:
 
 file:
   upload-dir: "./items/src/main/resources/item-images"
+
+trace: true

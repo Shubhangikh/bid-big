@@ -31,6 +31,11 @@ public class AuctionController {
 	public void createAuction(@Valid @RequestBody AuctionRequest request) {
 		auctionService.createAuctions( request);
 	}
+
+	@RequestMapping(path = "/createsingle", method = RequestMethod.POST)
+	public void createAuction(@Valid @RequestBody Auction request) {
+		auctionService.createAuction( request);
+	}
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
 	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
