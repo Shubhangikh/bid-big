@@ -2,6 +2,7 @@ package com.bidbig.items.service;
 
 import com.bidbig.items.dto.ItemDto;
 import com.bidbig.items.entity.Item;
+import com.bidbig.items.entity.ItemInfo;
 import com.bidbig.items.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,5 +55,9 @@ public class ItemService {
 
     public Page<Item> getPageOfItems(String username, Pageable pageable) {
         return itemRepository.findAllByUsername(username, pageable);
+    }
+
+    public ItemInfo getItemById(int itemId) {
+        return itemRepository.findByItemId(itemId);
     }
 }

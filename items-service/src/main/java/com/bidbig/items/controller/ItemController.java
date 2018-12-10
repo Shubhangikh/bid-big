@@ -4,6 +4,7 @@ import com.bidbig.items.dto.ItemDto;
 import com.bidbig.items.dto.ItemImageDto;
 import com.bidbig.items.dto.User;
 import com.bidbig.items.entity.Item;
+import com.bidbig.items.entity.ItemInfo;
 import com.bidbig.items.payload.UploadImageResponse;
 import com.bidbig.items.service.CustomMultipartFile;
 import com.bidbig.items.service.ImageStorageService;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -70,17 +72,22 @@ public class ItemController {
 
     @Transactional
     @RequestMapping(value = "/item/{itemId}", method = RequestMethod.PUT)
+    @ResponseBody
     public ResponseEntity<?> update(@PathVariable("itemId") String itemId, @RequestBody @Valid ItemDto itemDto,
                                     @RequestParam(value = "image", required = false) MultipartFile image) {
-        String fileName = imageStorageService.storeImage(image);
-        String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadImage/")
-                .path(fileName)
-                .toUriString();
-        itemService.updateItem(Integer.parseInt(itemId), itemDto, fileName);
+        if(!ObjectUtils.isEmpty(image)) {
+            String fileName = imageStorageService.storeImage(image);
+            String imageDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadImage/")
+                    .path(fileName)
+                    .toUriString();
+            itemService.updateItem(Integer.parseInt(itemId), itemDto, fileName);
 
-        UploadImageResponse imageResponse = new UploadImageResponse(fileName, imageDownloadUri, image.getContentType(), image.getSize());
-        return ResponseEntity.ok(imageResponse);
+            UploadImageResponse imageResponse = new UploadImageResponse(fileName, imageDownloadUri, image.getContentType(), image.getSize());
+        } else {
+            itemService.updateItem(Integer.parseInt(itemId), itemDto, null);
+        }
+        return ResponseEntity.ok().build();
     }
 
     @Transactional
@@ -92,7 +99,13 @@ public class ItemController {
             String message = String.format("Item (ItemId: %s) cannot be deleted because the status for this item is Auctioned.", itemId);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(objectMapper.writeValueAsString(message));
         }
+    }
 
+
+    @RequestMapping(value = "item/{itemId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getById(@PathVariable("itemId") String itemId) {
+        ItemInfo item = itemService.getItemById(Integer.parseInt(itemId));
+        return ResponseEntity.ok(item);
     }
 
     // @Transactional

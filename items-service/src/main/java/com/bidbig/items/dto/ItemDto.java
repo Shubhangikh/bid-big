@@ -15,6 +15,7 @@ public class ItemDto {
     @NotBlank
     private String name;
     private String description;
+    @NotBlank
     private String username;
     private double minBidPrice;
 }
