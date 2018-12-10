@@ -49,6 +49,11 @@ public class AuctionServiceImpl implements AuctionService {
 	}	
 
 	@Override
+	public void createAuction(Auction request) {
+		auctionRepository.save(request);
+	}
+
+	@Override
 	public void createAuctions(AuctionRequest request) {
 
 		Date auctionDate = request.getAuctionDate();
@@ -63,7 +68,7 @@ public class AuctionServiceImpl implements AuctionService {
 			Auction auction = new Auction();
 			auction.setStartTime(slot.getStartTime());
 			auction.setEndTime(slot.getEndTime());
-			auction.setAuctionDate(new Date());
+			auction.setAuctionDate(auctionDate);
 			auctionRepository.save(auction);
 		}
 
