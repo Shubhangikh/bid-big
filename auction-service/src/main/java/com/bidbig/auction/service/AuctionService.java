@@ -12,4 +12,6 @@ public interface AuctionService {
 	List<Auction> listAuctions(DateRange request);
 
 	void updateAuction(Auction request);
+
+	Auction currentAuction();
 }

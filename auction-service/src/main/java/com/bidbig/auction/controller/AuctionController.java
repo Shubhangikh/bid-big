@@ -39,9 +39,12 @@ public class AuctionController {
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
 	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
-		// System.out.println("Connnected clients ----------------");
-		// System.out.println(hazelInstance.getClientService().getConnectedClients());
 		return auctionService.listAuctions( request);
+	}
+
+	@RequestMapping(path = "/current", method = RequestMethod.GET)
+	public Auction currentAuction() {
+		return auctionService.currentAuction();
 	}
 
 	@RequestMapping(path = "/update", method = RequestMethod.POST)

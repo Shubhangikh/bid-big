@@ -40,7 +40,20 @@ public class AuctionServiceImpl implements AuctionService {
 
 	@Override
 	public List<Auction> listAuctions(DateRange request) {
-		return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate());
+		if(request.getItems()) {
+			return auctionRepository.findAllByAuctionDateBetweenAndItemIdNotNull(request.getStartDate(), request.getEndDate());
+		}
+		else {
+			return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate());
+		}
+		
+	}
+
+	@Override
+	public Auction currentAuction() {
+
+		return auctionRepository.findOneByEndTimeGreaterThanAndStartTimeLessThanEqual(new DateTime(new Date()), new DateTime(new Date()));
+
 	}
 
 	@Override
