@@ -2,6 +2,7 @@ package com.bidbig.items.service;
 
 import com.bidbig.items.dto.ItemDto;
 import com.bidbig.items.entity.Item;
+import com.bidbig.items.entity.ItemInfo;
 import com.bidbig.items.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class ItemService {
                 .minBidPrice(itemDto.getMinBidPrice())
                 .imageLocation(imageUri)
                 .status((short)1)
-                .userId(itemDto.getUserId())
+                .username(itemDto.getUsername())
                 .created(new Timestamp(new Date().getTime()))
                 .modified(new Timestamp(new Date().getTime()))
                 .build();
@@ -37,7 +38,7 @@ public class ItemService {
             item.setName(itemDto.getName());
             item.setDescription(itemDto.getDescription());
             item.setMinBidPrice(itemDto.getMinBidPrice());
-            item.setImageLocation(imageUri);
+            //item.setImageLocation(imageUri);
             item.setModified(new Timestamp(new Date().getTime()));
         }
 
@@ -45,14 +46,18 @@ public class ItemService {
 
     public boolean deleteItem(Integer itemId) {
         Item item = itemRepository.getOne(itemId);
-        if(item.getStatus() == 1) {
+        if(item.getStatus() == 2) {
             return false;
         }
         itemRepository.delete(item);
         return true;
     }
 
-    public Page<Item> getPageOfItems(Integer userId, Pageable pageable) {
-        return itemRepository.findAllByUserId(userId, pageable);
+    public Page<Item> getPageOfItems(String username, Pageable pageable) {
+        return itemRepository.findAllByUsername(username, pageable);
+    }
+
+    public ItemInfo getItemById(int itemId) {
+        return itemRepository.findByItemId(itemId);
     }
 }

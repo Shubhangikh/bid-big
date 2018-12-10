@@ -33,20 +33,14 @@ public class ImageStorageService {
         }
     }
 
-    public String storeImage(MultipartFile file, Integer userId) {
+    public String storeImage(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
-            if(fileName.contains("..")) {
-                throw new ImageStorageException("File name contains invalid path sequence." + fileName);
-            }
-            String extension = fileName.substring(fileName.lastIndexOf("."));
-            String fileNameWithoutExtension = fileName.substring(0, fileName.indexOf(extension));
-            fileNameWithoutExtension += new Date().getTime() + "_" + userId + extension;
-            Path targetLocation = this.imageStorageLocation.resolve(fileNameWithoutExtension);
+            Path targetLocation = this.imageStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return fileNameWithoutExtension;
+            return fileName;
         } catch (IOException ex) {
             throw new ImageStorageException("Could not store file " + fileName + ". Please try again.", ex);
         }
@@ -63,7 +57,7 @@ public class ImageStorageService {
             }
 
         } catch (MalformedURLException ex) {
-            throw new ImageNotFoundException("Image not found " + fileName, ex);
+            throw new ImageNotFoundException("Error:Image not found " + fileName, ex);
         }
     }
 }

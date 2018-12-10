@@ -11,11 +11,10 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDto {
+public class ItemImageDto {
+    ItemDto item;
     @NotBlank
-    private String name;
-    private String description;
-    @NotBlank
-    private String username;
-    private double minBidPrice;
+    String image;
+
+
 }
