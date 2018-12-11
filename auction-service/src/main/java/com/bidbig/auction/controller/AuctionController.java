@@ -8,7 +8,8 @@ import com.bidbig.auction.domain.Auction;
 import com.bidbig.auction.service.AuctionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,9 +40,17 @@ public class AuctionController {
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
 	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
-		// System.out.println("Connnected clients ----------------");
-		// System.out.println(hazelInstance.getClientService().getConnectedClients());
-		return auctionService.listAuctions( request);
+		return auctionService.listAuctions(request);
+	}
+
+	@RequestMapping(path = "/item/list", method = RequestMethod.POST)
+	public Page<Auction> listAuctionWithItem(@Valid @RequestBody DateRange request, Pageable pageable) {
+		return auctionService.listAuctionsWithItems(request, pageable);
+	}	
+
+	@RequestMapping(path = "/current", method = RequestMethod.GET)
+	public Auction currentAuction() {
+		return auctionService.currentAuction();
 	}
 
 	@RequestMapping(path = "/update", method = RequestMethod.POST)
