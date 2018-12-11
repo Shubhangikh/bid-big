@@ -42,15 +42,20 @@ public class AuctionServiceImpl implements AuctionService {
 	private Environment env;	
 
 	@Override
-	public Page<Auction> listAuctions(DateRange request, Pageable pageable) {
-		if(request.getItems()) {
-			return auctionRepository.findAllByAuctionDateBetweenAndItemIdNotNull(request.getStartDate(), request.getEndDate(), pageable);
-		}
-		else {
-			return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate(), pageable);
-		}
+	public List<Auction> listAuctions(DateRange request) {
+
+		return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate());
+
 		
 	}
+
+	@Override
+	public Page<Auction> listAuctionsWithItems(DateRange request, Pageable pageable) {
+
+		return auctionRepository.findAllByAuctionDateBetweenAndItemIdNotNull(request.getStartDate(), request.getEndDate(), pageable);
+
+		
+	}	
 
 	@Override
 	public Auction currentAuction() {

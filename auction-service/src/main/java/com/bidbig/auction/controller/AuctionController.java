@@ -39,9 +39,14 @@ public class AuctionController {
 	}
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
-	public Page<Auction> listAuction(@Valid @RequestBody DateRange request, Pageable pageable) {
-		return auctionService.listAuctions(request, pageable);
+	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
+		return auctionService.listAuctions(request);
 	}
+
+	@RequestMapping(path = "/item/list", method = RequestMethod.POST)
+	public Page<Auction> listAuctionWithItem(@Valid @RequestBody DateRange request, Pageable pageable) {
+		return auctionService.listAuctionsWithItems(request, pageable);
+	}	
 
 	@RequestMapping(path = "/current", method = RequestMethod.GET)
 	public Auction currentAuction() {

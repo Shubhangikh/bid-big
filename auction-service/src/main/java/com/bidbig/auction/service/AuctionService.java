@@ -13,7 +13,9 @@ public interface AuctionService {
 
 	void createAuction(Auction request);
 
-	Page<Auction> listAuctions(DateRange request, Pageable pageable);
+	List<Auction> listAuctions(DateRange request);
+
+	Page<Auction> listAuctionsWithItems(DateRange request, Pageable pageable);
 
 	void updateAuction(Auction request);
 

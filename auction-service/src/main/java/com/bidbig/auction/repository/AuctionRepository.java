@@ -19,7 +19,7 @@ import java.util.Date;
 public interface AuctionRepository extends JpaRepository<Auction, Long>, JpaSpecificationExecutor<Auction>  {
 
     @Cacheable("findAllByAuctionDateBetween")
-    public Page<Auction> findAllByAuctionDateBetween(Date auctionDateStartTime, Date auctionDateEndTime, Pageable pageable);
+    public List<Auction> findAllByAuctionDateBetween(Date auctionDateStartTime, Date auctionDateEndTime);
 
     public Page<Auction> findAllByAuctionDateBetweenAndItemIdNotNull(Date auctionDateStartTime, Date auctionDateEndTime, Pageable pageable);
 
