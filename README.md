@@ -22,7 +22,10 @@ For Frontend
 Navigate to the root folder
  To run locally
 
+Change proxy to be ip in pacakge.json
+
 Run “npm install”
+
 Run “npm run start”
 
 
