@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+
 import java.util.Date;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
@@ -39,12 +42,12 @@ public class AuctionServiceImpl implements AuctionService {
 	private Environment env;	
 
 	@Override
-	public List<Auction> listAuctions(DateRange request) {
+	public Page<Auction> listAuctions(DateRange request, Pageable pageable) {
 		if(request.getItems()) {
-			return auctionRepository.findAllByAuctionDateBetweenAndItemIdNotNull(request.getStartDate(), request.getEndDate());
+			return auctionRepository.findAllByAuctionDateBetweenAndItemIdNotNull(request.getStartDate(), request.getEndDate(), pageable);
 		}
 		else {
-			return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate());
+			return auctionRepository.findAllByAuctionDateBetween(request.getStartDate(), request.getEndDate(), pageable);
 		}
 		
 	}

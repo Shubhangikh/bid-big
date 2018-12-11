@@ -8,7 +8,8 @@ import com.bidbig.auction.domain.Auction;
 import com.bidbig.auction.service.AuctionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,8 +39,8 @@ public class AuctionController {
 	}
 	
 	@RequestMapping(path = "/list", method = RequestMethod.POST)
-	public List<Auction> listAuction(@Valid @RequestBody DateRange request) {
-		return auctionService.listAuctions( request);
+	public Page<Auction> listAuction(@Valid @RequestBody DateRange request, Pageable pageable) {
+		return auctionService.listAuctions(request, pageable);
 	}
 
 	@RequestMapping(path = "/current", method = RequestMethod.GET)
