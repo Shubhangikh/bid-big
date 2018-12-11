@@ -102,10 +102,17 @@ public class ItemController {
     }
 
 
-    @RequestMapping(value = "item/{itemId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/item/{itemId}", method = RequestMethod.GET)
     public ResponseEntity<?> getById(@PathVariable("itemId") String itemId) {
         ItemInfo item = itemService.getItemById(Integer.parseInt(itemId));
         return ResponseEntity.ok(item);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/item/status/{itemId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateStatus(@PathVariable("itemId") String itemId) {
+        itemService.updateStatus(Integer.parseInt(itemId));
+        return ResponseEntity.ok().build();
     }
 
     // @Transactional

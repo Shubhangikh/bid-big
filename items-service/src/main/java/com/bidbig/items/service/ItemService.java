@@ -38,7 +38,6 @@ public class ItemService {
             item.setName(itemDto.getName());
             item.setDescription(itemDto.getDescription());
             item.setMinBidPrice(itemDto.getMinBidPrice());
-            //item.setImageLocation(imageUri);
             item.setModified(new Timestamp(new Date().getTime()));
         }
 
@@ -59,5 +58,10 @@ public class ItemService {
 
     public ItemInfo getItemById(int itemId) {
         return itemRepository.findByItemId(itemId);
+    }
+
+    public void updateStatus(int itemId) {
+        Item item = itemRepository.getOne(itemId);
+        item.setStatus((short)2);
     }
 }
