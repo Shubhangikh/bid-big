@@ -20,12 +20,10 @@ Restart
 
 For Frontend
 Navigate to the root folder
-To run locally
+ To run locally
+
 Run “npm install”
 Run “npm run start”
-To build for production
-Run “npm install”
-Run “npm run build”
-Copy content of build folder and paste it in \gateway\src\main\resources\static 
 
-Navigate to https://localhost
+
+Navigate to https://localhost:1500
