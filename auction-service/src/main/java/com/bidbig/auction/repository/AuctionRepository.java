@@ -14,10 +14,10 @@ import java.util.Date;
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     @Cacheable("findAllByAuctionDateBetween")
-    public List<Auction> findAllByAuctionDateBetween(Date auctionDateStartTime, Date auctionDateEndTime);
+    List<Auction> findAllByAuctionDateBetween(Date auctionDateStartTime, Date auctionDateEndTime);
 
     @CacheEvict(value = "findAllByAuctionDateBetween", allEntries = true)
-    public Auction save(Auction auction);
+    Auction save(Auction auction);
 
 }
 
